@@ -57,7 +57,7 @@ class _MoviePoster extends StatelessWidget {
           ),
           SizedBox(height: 5,),
           Text(
-            'Star Wars: El retorno del Jedi',
+            'Star Wars: El retorno del Jedi abdiquwbd qjwbdubqw dibqbwd ',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

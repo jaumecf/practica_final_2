@@ -109,7 +109,7 @@ class _Overview extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Text(
-        'Labore eiusmod ad reprehenderit irure eu sunt ex minim. Lorem fugiat Lorem proident duis ea cupidatat. Commodo duis culpa reprehenderit ad elit. Velit duis officia reprehenderit ullamco sint id anim officia est. Enim mollit nisi et exercitation dolore commodo. Cillum mollit laborum non nulla cillum non do reprehenderit Lorem deserunt ex eu sunt do.',
+        'Incididunt cupidatat tempor eu qui incididunt magna nulla sint. Dolor mollit veniam occaecat nisi cupidatat nulla exercitation ea anim esse. Veniam laboris sunt officia pariatur. Anim ipsum proident irure pariatur et officia irure elit cillum.',
         textAlign: TextAlign.justify,
         style: Theme.of(context).textTheme.subtitle1,
       ),
