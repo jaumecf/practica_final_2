@@ -15,7 +15,7 @@ class CardSwiper extends StatelessWidget {
 
     // Aquesta comanda servirà per a esbrinar la grandària de la pantalla i poder-nos adaptar a ella
     final size = MediaQuery.of(context).size;
-    print(movies.length);
+    // print(movies.length);
     if( this.movies.length == 0) {
       return Container(
         width: double.infinity,
@@ -39,7 +39,7 @@ class CardSwiper extends StatelessWidget {
         itemHeight: size.height * 0.4,
         itemBuilder: (BuildContext context, int index){
           final movie = movies[index];
-          print(movie.fullPosterImg);
+          // print(movie.fullPosterImg);
 
           return GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'details', arguments: 'detalls peli'),
