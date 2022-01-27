@@ -13,6 +13,7 @@ class CardSwiper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Aquesta comanda servirà per a esbrinar la grandària de la pantalla i poder-nos adaptar a ella
     final size = MediaQuery.of(context).size;
     print(movies.length);
     if( this.movies.length == 0) {
@@ -32,7 +33,7 @@ class CardSwiper extends StatelessWidget {
       height: size.height * 0.5,
       // color: Colors.red,
       child: Swiper(
-        itemCount: 20,
+        itemCount: movies.length,
         layout: SwiperLayout.STACK,
         itemWidth: size.width * 0.6,
         itemHeight: size.height * 0.4,

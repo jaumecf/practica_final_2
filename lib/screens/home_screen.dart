@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
 
               
               // Slider de pel·licules
-              MovieSlider(),
+              MovieSlider(movies: moviesProvider.popularMovies,title: 'Populars'),
               // Poodeu fer la prova d'afegir-ne uns quants, veureu com cada llista és independent
               // MovieSlider(),
               // MovieSlider(),
