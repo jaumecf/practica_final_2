@@ -17,6 +17,8 @@ class MoviesProvider extends ChangeNotifier{
   List<Movie> onDisplayMovies = [];
   List<Movie> popularMovies = [];
 
+  Map<int, List<Cast>> moviesCast = {};
+
   int _popularPage = 0;
   
 
@@ -71,6 +73,24 @@ class MoviesProvider extends ChangeNotifier{
     // els nous resultats de la cerca, que correpondran a una nova pàgina, etc...
     popularMovies = [...popularMovies, ...popularResponse.results];
     notifyListeners();
+  }
+
+  Future<List<Cast>> getMovieCast(int movieId) async{
+    // TODO: revisar mapa
+    print('Demanam info al server:');
+    final jsonData = await _getJsonData('3/movie/$movieId/credits');
+    final creditsResponse = CreditsResponse.fromJson(jsonData);
+
+    // Emmagatzemam la llista d'actors
+    moviesCast[movieId] = creditsResponse.cast;
+    return creditsResponse.cast;
+
+    // Quan hi ha algun canvi, en el conjunt de dades que conté el nostre provider,
+    // els Widgets que l'estan utilitzant, han de ser notificats, i s'han d'actualitzar
+    // les seves dades. Això ho podem fer amb el següent mètode, que notificarà al Widgets
+    // que han canviat les dades i que es repinti.
+    notifyListeners();
+
   }
 
 
