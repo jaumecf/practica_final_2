@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:practica_final_2/models/models.dart';
 import 'package:practica_final_2/models/now_playing_response.dart';
 import 'package:practica_final_2/models/popular_response.dart';
+import 'package:practica_final_2/models/search_response.dart';
 
 class MoviesProvider extends ChangeNotifier{
 
@@ -44,6 +45,7 @@ class MoviesProvider extends ChangeNotifier{
   }
 
   getOnDisplayMovies() async{
+    
     final jsonData = await _getJsonData('3/movie/now_playing');
     final nowPlayingResponse = NowPlayingResponse.fromJson(jsonData);
     // print(nowPlayingResponse.results[0].title);
@@ -93,7 +95,19 @@ class MoviesProvider extends ChangeNotifier{
     // les seves dades. Això ho podem fer amb el següent mètode, que notificarà al Widgets
     // que han canviat les dades i que es repinti.
     notifyListeners();
+  }
 
+  Future<List<Movie>> searchMovies(String query) async{
+    var url = Uri.https(_baseUrl, '3/search/movie',{
+      'api_key'   : _apiKey,
+      'language'  : _language,
+      'query'     : query
+      });
+    // Await the http get response, then decode the json-formatted response.
+    final response = await http.get(url);
+    final searchResponse = SearchResponse.fromJson(response.body);
+    print('Fent petició!');
+    return searchResponse.movies;
   }
 
 
