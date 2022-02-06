@@ -1,8 +1,11 @@
 // La idea d'aquesta classe és que sigui el proveidor d'informació d'aquesta classe
 //  que sigui accessible des de qualsevol Widget de l'aplicació
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:practica_final_2/helpers/debouncer.dart';
 import 'package:practica_final_2/models/models.dart';
 import 'package:practica_final_2/models/now_playing_response.dart';
 import 'package:practica_final_2/models/popular_response.dart';
@@ -21,6 +24,14 @@ class MoviesProvider extends ChangeNotifier{
   Map<int, List<Cast>> moviesCast = {};
 
   int _popularPage = 0;
+
+  final debouncer = Debouncer(
+    duration: Duration(
+      milliseconds: 500
+    )
+  );
+  final StreamController<List<Movie>> _movieSuggestionsController = new StreamController.broadcast();
+  Stream<List<Movie>> get movieSuggestionStream => this._movieSuggestionsController.stream;
   
 
   MoviesProvider(){
@@ -108,6 +119,21 @@ class MoviesProvider extends ChangeNotifier{
     final searchResponse = SearchResponse.fromJson(response.body);
     print('Fent petició!');
     return searchResponse.movies;
+  }
+
+  void getSuggestionsByQuery(String searchTerm){
+    debouncer.value = '';
+    debouncer.onValue = (value) async{
+      // print('Valor per a cerca: $value');
+      final results = await this.searchMovies(value);
+      this._movieSuggestionsController.add(results);
+    };
+
+    final timer = Timer.periodic(Duration(milliseconds: 300), ( _ ){
+      debouncer.value = searchTerm;
+    });
+
+    Future.delayed(Duration(milliseconds: 301)).then(( _ ) => timer.cancel());
   }
 
 
