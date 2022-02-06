@@ -34,6 +34,13 @@ class Movie {
     double voteAverage;
     int voteCount;
 
+    String? heroId;
+
+    String setHeroId(String page){
+       heroId= '${page}-${this.id}';
+       return heroId!;
+    }
+
     get fullPosterImg{
       if(this.posterPath != null){
         return 'https://image.tmdb.org/t/p/w500${ this.posterPath }';

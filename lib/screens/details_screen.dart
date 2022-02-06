@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:practica_final_2/models/models.dart';
 import 'package:practica_final_2/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
-
   
   @override
   Widget build(BuildContext context) {
@@ -72,7 +69,6 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PosterAndTitile extends StatelessWidget {
-  
   final Movie movie;
 
   const _PosterAndTitile({Key? key, required this.movie}) : super(key: key);
@@ -86,12 +82,15 @@ class _PosterAndTitile extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(
-              placeholder: AssetImage('assets/loading.gif'),
-              image: NetworkImage(movie.fullPosterImg),
-              height: 150,
+          Hero(
+            tag: movie.heroId!,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: AssetImage('assets/loading.gif'),
+                image: NetworkImage(movie.fullPosterImg),
+                height: 150,
+              ),
             ),
           ),
           SizedBox(width: 20),

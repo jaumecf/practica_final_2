@@ -4,6 +4,7 @@ import 'package:practica_final_2/models/models.dart';
 
 class CardSwiper extends StatelessWidget {
   final List<Movie> movies;
+  final String prop = 'swiper';
 
   const CardSwiper({
     Key? key,
@@ -43,13 +44,16 @@ class CardSwiper extends StatelessWidget {
 
           return GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'details', arguments: movie),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: FadeInImage(
-                placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage(movie.fullPosterImg),
-                fit: BoxFit.cover
-               ),
+            child: Hero(
+              tag: movie.setHeroId(prop),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/no-image.jpg'),
+                  image: NetworkImage(movie.fullPosterImg),
+                  fit: BoxFit.cover
+                 ),
+              ),
             ),
           );
         },
